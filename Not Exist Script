@@ -1,0 +1,27 @@
+WITH q31_1 AS (
+    -- paste your 31.1 query here
+    SELECT
+        c.work_order_uuid,
+        c.workorder,
+        c.po_number,
+        c.upstream_mh,
+        c.downstream_mh,
+        c.manhole_number,
+        c.lateral_segment_reference,
+        c.pipe_use,
+        c.access_type,
+        c.mh_use
+    FROM customerdata.epsewerai_cr_inspect c
+    -- your 31.1 filters/joins
+)
+SELECT q.*
+FROM q31_1 q
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM customerdata.stg_sewerai_inspections s
+    WHERE s.project_sid   = q.work_order_uuid
+      AND s.work_order    = q.workorder
+      AND s.po_number     = q.po_number
+      AND s.upstream_mh   = q.upstream_mh
+      AND s.downstream_mh = q.downstream_mh
+);
