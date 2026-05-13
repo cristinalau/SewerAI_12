@@ -1,6 +1,36 @@
-WITH q31_1 AS (
-    -- paste your 31.1 query here
-    SELECT
+WITH filtered_dr AS (
+    SELECT DISTINCT 
+        e.uuid AS dr_uuid
+    FROM mnt.workordertask a
+    JOIN mnt.workorders wo 
+        ON wo.workordersoi = a.workorder_oi
+    JOIN mnt.asset s 
+        ON s.assetoi = a.asset_oi
+    JOIN customerdata.epdrfacworkhistory e 
+        ON e.wotask_oi = a.workordertaskoi
+    WHERE wo.site_oi = 58
+      AND a.workclassifi_oi IN (
+          209,211,215,266,442,462,
+          183,196,207,256,263
+      )
+      AND NVL(UPPER(TRIM(a.wostatus)), ' ') NOT IN (70,7,8,100)
+      AND s.assetnumber NOT LIKE '%DR%'
+      AND s.assetnumber NOT LIKE '%SE%'
+      AND s.assetnumber NOT LIKE '%SW%'
+      AND s.assetnumber NOT LIKE '%-%'
+      AND s.assetnumber NOT LIKE '%.%'
+      AND s.assetnumber NOT IN ('IBS01','OPS','1')
+      AND (
+            s.assetnumber <> '1195290'
+         OR (
+                s.assetnumber = '1195290'
+            AND a.createdate_dttm >= DATE '2025-01-01'
+            )
+          )
+),
+
+q31_1 AS (
+    SELECT DISTINCT
         c.work_order_uuid,
         c.workorder,
         c.po_number,
@@ -11,9 +41,19 @@ WITH q31_1 AS (
         c.pipe_use,
         c.access_type,
         c.mh_use
-    FROM customerdata.epsewerai_cr_inspect c
-    -- your 31.1 filters/joins
+    FROM filtered_dr d
+    JOIN customerdata.sewerai_inspections_v v
+        ON v.dr_uuid = d.dr_uuid
+    JOIN customerdata.epsewerai_cr_inspect c
+        ON c.inspection_sid = LOWER(
+              REGEXP_REPLACE(
+                REGEXP_REPLACE(NVL(v.dr_uuid, ''), '[^0-9A-Fa-f]', ''),
+                '(^[0-9A-Fa-f]{8})([0-9A-Fa-f]{4})([0-9A-Fa-f]{4})([0-9A-Fa-f]{4})([0-9A-Fa-f]{12}$)',
+                '\1-\2-\3-\4-\5'
+              )
+           )
 )
+
 SELECT q.*
 FROM q31_1 q
 WHERE NOT EXISTS (
