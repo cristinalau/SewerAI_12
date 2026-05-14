@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><audit_trail flowId="1000316" cid="bpel:2331910">
+<event date="2026-05-14T11:35:11.985-06:00" cat="2" type="2" n="0" sid="0">
+      <message>New instance of BPEL process "1.0" initiated (# "SendWOTChanges").</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="0" label="process" type="2" n="1" sid="BpPrc0.1">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="BpPrc0.1" label="tryBlock of process (2)" type="2" n="2" sid="BpTry0.2">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="BpTry0.2" label="Main (114)" type="2" n="3" sid="BpSeq0.3">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" wikey="2331910-BpRcv0-BpSeq0.3-1" cat="2" label="receiveFromDB" state="5" type="2" n="4" sid="BpSeq0.3">
+      <message>Received "receive" call from partner "ReadWOTSewerAIData"</message>
+      <details>
+&lt;inputVariableWOT&gt;&lt;part name="EpseweraiWotStg1Collection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;EpseweraiWotStg1Collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/ReadWOTSewerAIData"&gt;&lt;EpseweraiWotStg1&gt;&lt;taskUuid&gt;wBgBJq1rO0Gnt/E2xJNO3g==&lt;/taskUuid&gt;&lt;wotasktitle&gt;Drainage Neighbourhood Renewal&lt;/wotasktitle&gt;&lt;plndcompdateDttm xsi:nil="true"/&gt;&lt;plndstrtdateDttm&gt;2026-05-14T17:33:22.000-06:00&lt;/plndstrtdateDttm&gt;&lt;workclassifiOi&gt;211&lt;/workclassifiOi&gt;&lt;feedStatus&gt;NEW&lt;/feedStatus&gt;&lt;/EpseweraiWotStg1&gt;&lt;/EpseweraiWotStg1Collection&gt;&lt;/part&gt;&lt;/inputVariableWOT&gt;</details>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="BpSeq0.3" label="EncodeAndInvoke (117)" type="2" n="5" sid="BpScp0.4">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="BpScp0.4" label="tryBlock of scope EncodeAndInvoke (117)" type="2" n="6" sid="BpTry1.5">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.986-06:00" cat="1" psid="BpTry1.5" label="sequence (138)" type="2" n="7" sid="BpSeq2.6">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:11.987-06:00" wikey="2331910-BxExe1-BpSeq2.6-1" cat="3" label="EncodeAndSetOpaquePayload" type="2" n="8" sid="BpSeq2.6">
+      <message>EncodeAndSetOpaquePayload (SewerAI payload; date mappings applied) started.</message>
+   </event>
+   <event date="2026-05-14T11:35:12.123-06:00" wikey="2331910-BxExe1-BpSeq2.6-1" cat="3" label="EncodeAndSetOpaquePayload" type="2" n="9" sid="BpSeq2.6">
+      <message>Error in Java Embedding: No enabled SewerAI config row found for PROCESS_NAME=IvaraToSewerAI</message>
+   </event>
+   <event date="2026-05-14T11:35:12.124-06:00" wikey="2331910-BxExe1-BpSeq2.6-1" cat="2" label="EncodeAndSetOpaquePayload" state="1" type="4" n="10" sid="BpSeq2.6">
+      <message>The following exception occurred while attempting to execute &lt;exec&gt; "java.lang.RuntimeException: No enabled SewerAI config row found for PROCESS_NAME=IvaraToSewerAI"</message>
+      <details>
+&lt;exception class="java.lang.RuntimeException"&gt;java.lang.RuntimeException: No enabled SewerAI config row found for PROCESS_NAME=IvaraToSewerAI&lt;stack&gt;&lt;f&gt;orabpel.sendwotchanges.ExecLetBxExe1.execute#392&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BPELxExecWMP.__executeStatements#45&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP$1.call#197&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP$1.call#195&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSComponentProcessActivityWrapper$1.call#74&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSCallableActivityWrapper.execute#89&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSComponentProcessActivityWrapper.execute#82&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP.perform#205&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.performActivity#2938&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine._handleWorkItem#1295&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.handleWorkItem#1184&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.message.instance.PerformMessageHandler.handleLocal#92&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.DispatchHelper.handleLocalMessage#300&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.DispatchHelper.sendMemory#379&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.endRequest#4978&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.endRequest#4902&lt;/f&gt;&lt;f&gt;...&lt;/f&gt;&lt;/stack&gt;&lt;/exception&gt;
+&lt;root class="java.lang.RuntimeException"&gt;No enabled SewerAI config row found for PROCESS_NAME=IvaraToSewerAI&lt;stack&gt;&lt;f&gt;orabpel.sendwotchanges.ExecLetBxExe1.execute#172&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BPELxExecWMP.__executeStatements#45&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP$1.call#197&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP$1.call#195&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSComponentProcessActivityWrapper$1.call#74&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSCallableActivityWrapper.execute#89&lt;/f&gt;&lt;f&gt;com.collaxa.bpel.sws.SWSComponentProcessActivityWrapper.execute#82&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.ext.bpel.common.wmp.BaseBPELActivityWMP.perform#205&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.performActivity#2938&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine._handleWorkItem#1295&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.handleWorkItem#1184&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.message.instance.PerformMessageHandler.handleLocal#92&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.DispatchHelper.handleLocalMessage#300&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.dispatch.DispatchHelper.sendMemory#379&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.endRequest#4978&lt;/f&gt;&lt;f&gt;com.collaxa.cube.engine.CubeEngine.endRequest#4902&lt;/f&gt;&lt;f&gt;...&lt;/f&gt;&lt;/stack&gt;&lt;/root&gt;</details>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" cat="1" type="2" n="11" sid="BpSeq2.6">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" cat="1" type="2" n="12" sid="BpTry1.5">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" cat="1" psid="BpScp0.4" label="catchAll (119)" type="2" n="13" sid="BpCAl0.7">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" cat="1" psid="BpCAl0.7" label="sequence (120)" type="2" n="14" sid="BpSeq1.8">
+      <message>_cr_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" wikey="2331910-BxExe0-BpSeq1.8-1" cat="3" label="captureErrorLog" type="2" n="15" sid="BpSeq1.8">
+      <message>EncodeAndInvoke scope caught a fault.</message>
+   </event>
+   <event date="2026-05-14T11:35:12.131-06:00" wikey="2331910-BxExe0-BpSeq1.8-1" cat="2" label="captureErrorLog" state="5" type="2" n="16" sid="BpSeq1.8">
+      <message>bpelx:exec executed</message>
+   </event>
+   <event date="2026-05-14T11:35:12.139-06:00" wikey="2331910-BpAss0-BpSeq1.8-2" cat="2" to="InvokeUpdateFeedStatus_update_InputVariable" label="BuildProjectErrorStatusOnFault" state="1" type="1" n="17" sid="BpSeq1.8">
+      <message>Updated variable "InvokeUpdateFeedStatus_update_InputVariable"</message>
+      <details>
+&lt;InvokeUpdateFeedStatus_update_InputVariable&gt;&lt;part name="EpseweraiWotStg1Collection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;EpseweraiWotStg1Collection xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateWOTSewerAIData"&gt;&lt;EpseweraiWotStg1&gt;&lt;taskUuid&gt;wBgBJq1rO0Gnt/E2xJNO3g==&lt;/taskUuid&gt;&lt;feedStatus/&gt;&lt;/EpseweraiWotStg1&gt;&lt;/EpseweraiWotStg1Collection&gt;&lt;/part&gt;&lt;/InvokeUpdateFeedStatus_update_InputVariable&gt;</details>
+   </event>
+   <event date="2026-05-14T11:35:12.139-06:00" wikey="2331910-BpAss0-BpSeq1.8-2" cat="2" to="InvokeUpdateFeedStatus_update_InputVariable" label="BuildProjectErrorStatusOnFault" state="1" type="1" n="18" sid="BpSeq1.8">
+      <message>Updated variable "InvokeUpdateFeedStatus_update_InputVariable"</message>
+      <details>
+&lt;InvokeUpdateFeedStatus_update_InputVariable&gt;&lt;part name="EpseweraiWotStg1Collection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;EpseweraiWotStg1Collection xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateWOTSewerAIData"&gt;&lt;EpseweraiWotStg1&gt;&lt;taskUuid&gt;wBgBJq1rO0Gnt/E2xJNO3g==&lt;/taskUuid&gt;&lt;feedStatus&gt;ERROR&lt;/feedStatus&gt;&lt;/EpseweraiWotStg1&gt;&lt;/EpseweraiWotStg1Collection&gt;&lt;/part&gt;&lt;/InvokeUpdateFeedStatus_update_InputVariable&gt;</details>
+   </event>
+   <event date="2026-05-14T11:35:12.139-06:00" wikey="2331910-BpAss0-BpSeq1.8-2" cat="2" label="BuildProjectErrorStatusOnFault" state="5" type="1" n="19" sid="BpSeq1.8">
+      <message>Completed assign</message>
+   </event>
+   <event date="2026-05-14T11:35:12.139-06:00" wikey="2331910-BpInv0-BpSeq1.8-3" cat="2" label="InvokeProjectErrorStatusOnFault" state="1" type="2" n="20" sid="BpSeq1.8">
+      <message>Started invocation of operation "update" on partner "UpdateWOTSewerAIData".</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" wikey="2331910-BpInv0-BpSeq1.8-3" partnerWSDL="" cat="2" label="InvokeProjectErrorStatusOnFault" state="5" type="2" n="21" sid="BpSeq1.8">
+      <message>Invoked 1-way operation "update" on partner "UpdateWOTSewerAIData".</message>
+      <details>
+&lt;InvokeUpdateFeedStatus_update_InputVariable&gt;&lt;part name="EpseweraiWotStg1Collection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;EpseweraiWotStg1Collection xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UpdateWOTSewerAIData"&gt;&lt;EpseweraiWotStg1&gt;&lt;taskUuid&gt;wBgBJq1rO0Gnt/E2xJNO3g==&lt;/taskUuid&gt;&lt;feedStatus&gt;ERROR&lt;/feedStatus&gt;&lt;/EpseweraiWotStg1&gt;&lt;/EpseweraiWotStg1Collection&gt;&lt;/part&gt;&lt;/InvokeUpdateFeedStatus_update_InputVariable&gt;</details>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="22" sid="BpSeq1.8">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="23" sid="BpCAl0.7">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="24" sid="BpScp0.4">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="25" sid="BpSeq0.3">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="26" sid="BpTry0.2">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="1" type="2" n="27" sid="BpPrc0.1">
+      <message>_cl_</message>
+   </event>
+   <event date="2026-05-14T11:35:12.178-06:00" cat="2" type="2" n="28" sid="BpPrc0.1">
+      <message>BPEL process instance "2331910" completed</message>
+   </event>
+   <event date="2026-05-14T11:35:12.218-06:00" cat="2" type="3" n="29" sid="BpPrc0.1">
+      <message>The transaction was rolled back. The work performed for bpel instance "2331910" was rolled back, but the audit trail has been saved for this instance.If this is a sync request, please resubmit the request from the client. If it is an async request, please recover from the recovery console by resubmitting the invoke message.</message>
+   </event>
+</audit_trail>
