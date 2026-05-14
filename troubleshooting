@@ -1,0 +1,58 @@
+The EM error is clear: the BPEL deployed successfully, but at runtime it cannot find an enabled config row:
+
+No enabled SewerAI config row found for PROCESS_NAME=IvaraToSewerAI
+
+This happened inside EncodeAndSetOpaquePayload, before it sent to SewerAI.
+
+Run this first:
+
+SELECT *
+FROM CUSTOMERDATA.EPSEWERAI_SYNC_CONFIG;
+
+Then make sure you have exactly this kind of row:
+
+MERGE INTO CUSTOMERDATA.EPSEWERAI_SYNC_CONFIG c
+USING (
+    SELECT
+        'IvaraToSewerAI' AS process_name,
+        'your-account-sid-here' AS account_sid,
+        'X-SAI your-api-key-here' AS api_authorization,
+        'Y' AS is_enabled
+    FROM dual
+) x
+ON (c.process_name = x.process_name)
+WHEN MATCHED THEN UPDATE SET
+    c.account_sid = x.account_sid,
+    c.api_authorization = x.api_authorization,
+    c.is_enabled = x.is_enabled
+WHEN NOT MATCHED THEN INSERT (
+    process_name,
+    account_sid,
+    api_authorization,
+    is_enabled
+) VALUES (
+    x.process_name,
+    x.account_sid,
+    x.api_authorization,
+    x.is_enabled
+);
+
+COMMIT;
+
+Then test:
+
+SELECT ACCOUNT_SID,
+       API_AUTHORIZATION
+FROM CUSTOMERDATA.EPSEWERAI_SYNC_CONFIG
+WHERE PROCESS_NAME = 'IvaraToSewerAI'
+  AND IS_ENABLED = 'Y';
+
+If this returns zero rows, that is the exact reason for the EM error.
+
+Also check capitalization/spaces:
+
+SELECT '[' || PROCESS_NAME || ']' AS process_name_check,
+       '[' || IS_ENABLED || ']' AS enabled_check
+FROM CUSTOMERDATA.EPSEWERAI_SYNC_CONFIG;
+
+Most likely issue: your table row has a different PROCESS_NAME, or IS_ENABLED is not exactly Y.
