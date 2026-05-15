@@ -32,6 +32,40 @@
 --          "Unknown Facility Type" 2= "Catch Basin" -> Pioneer "Maintenance Hole (Manhole)" -> MACP
 SET DEFINE OFF; 
 
+-- ============================================================================
+-- File: commented_sewerai_inspections_view.sql
+-- Purpose:
+--   Creates CUSTOMERDATA.SEWERAI_INSPECTIONS_V with added inline comments
+--   explaining how the output is built for MACP, PACP, and LACP inspection data.
+--
+-- Key note on the 4 elevation/depth fields:
+--   UP_ELEVATION           = upstream ground elevation
+--   UP_GRADE_TO_INVERT     = upstream depth from ground to pipe invert
+--   DOWN_ELEVATION         = downstream ground elevation
+--   DOWN_GRADE_TO_INVERT   = downstream depth from ground to pipe invert
+--
+--   In the query, these are calculated only in PACP (pipe inspections):
+--     UP_GRADE_TO_INVERT   = raw_usgroundelev_fl - raw_usinvertelev_fl
+--     DOWN_GRADE_TO_INVERT = raw_dsgroundelev_fl - raw_dsinvertelev_fl
+--
+--   So the hidden relationship is:
+--     upstream invert elevation   = UP_ELEVATION   - UP_GRADE_TO_INVERT
+--     downstream invert elevation = DOWN_ELEVATION - DOWN_GRADE_TO_INVERT
+--
+-- Important:
+--   Despite the name "GRADE_TO_INVERT", this is not slope or grade %.
+--   It is vertical depth from ground elevation down to the invert elevation.
+-- ============================================================================
+-- Ivara 10 "Unknown Facility" &
+--          "Unknown Facility Type" 4= "Pipe" -> Pioneer "Mainline" -> PACP
+--          "Unknown Facility Type" 5= "Catch Basin Lead" -> Pioneer "Mainline" -> PACP
+--          "Unknown Facility Type" 6= "Service - Sanitary" -> Pioneer "Lateral" -> LACP
+--          "Unknown Facility Type" 7= "Service - Storm" -> Pioneer "Lateral" -> LACP
+--          "Unknown Facility Type" 8= "Service - Water" -> Pioneer "Lateral" -> LACP
+--          "Unknown Facility Type" 3= "Manhole" -> Pioneer "Maintenance Hole (Manhole)" -> MACP
+--          "Unknown Facility Type" 2= "Catch Basin" -> Pioneer "Maintenance Hole (Manhole)" -> MACP
+SET DEFINE OFF; 
+
 CREATE OR REPLACE FORCE EDITIONABLE VIEW "CUSTOMERDATA"."SEWERAI_INSPECTIONS_V" (
     "WORK_ORDERS_NUMBER",
     "WORK_ORDER_TASK_TITLE",
@@ -245,8 +279,8 @@ pacp_base AS (
         ep1.shape                                          AS raw_shape,
         ep1.wwtype                                         AS raw_wwtype,
         ep1.pipeid                                         AS raw_pipeid,
-        ep1.usfacilityid                                   AS upstream_mh,
-        ep1.dsfacilityid                                   AS downstream_mh,
+        REGEXP_REPLACE(TRIM(ep1.usfacilityid), '^MH', '', 1, 1, 'i') AS upstream_mh,
+        REGEXP_REPLACE(TRIM(ep1.dsfacilityid), '^MH', '', 1, 1, 'i') AS downstream_mh,
         ep1.diameter_fl                                    AS raw_diameter_fl,
         ep1.usgroundelev_fl                                AS raw_usgroundelev_fl,
         ep1.usinvertelev_fl                                AS raw_usinvertelev_fl,
