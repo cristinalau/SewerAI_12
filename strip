@@ -1,0 +1,2 @@
+REGEXP_REPLACE(TRIM(ep1.usfacilityid), '^(MH|CB|I0L|0F)', '', 1, 1, 'i') AS upstream_mh,
+REGEXP_REPLACE(TRIM(ep1.dsfacilityid), '^(MH|CB|I0L|0F)', '', 1, 1, 'i') AS downstream_mh,
